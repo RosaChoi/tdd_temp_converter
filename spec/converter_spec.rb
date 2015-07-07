@@ -1,7 +1,7 @@
 require 'spec_helper'
 require_relative '../converter'
 
-describe "TemperatureConverter" do
+describe TemperatureConverter do
   describe 'initialization' do
     it "stores the type and temp" do
       converter = TemperatureConverter.new(:fahrenheit, 78)
