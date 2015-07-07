@@ -1,28 +1,28 @@
 require 'spec_helper'
 require_relative '../converter'
 
-describe "TemperatureConverter" do
+describe TemperatureConverter do
   describe 'initialization' do
     it "stores the type and temp" do
       converter = TemperatureConverter.new(:fahrenheit, 78)
       expect(converter.unit).to be == :fahrenheit
       expect(converter.temp).to be == 78
 
-      converter = TemperatureConverter.new(:celsius, 78)
+      converter = TemperatureConverter.new(:celsius, 20.4)
       expect(converter.unit).to be == :celsius
-      expect(converter.temp).to be == 78
+      expect(converter.temp).to be == 20.4
 
-      converter = TemperatureConverter.new(:kelvin, 78)
+      converter = TemperatureConverter.new(:kelvin, 111)
       expect(converter.unit).to be == :kelvin
-      expect(converter.temp).to be == 78
+      expect(converter.temp).to be == 111
     end
   end
 
   describe '#to_celsius' do
     it 'returns the original temperature when given celsius' do
-      converter = TemperatureConverter.new(:celsius, 78)
+      converter = TemperatureConverter.new(:celsius, 20.4)
 
-      expect(converter.to_celsius).to eq(78)
+      expect(converter.to_celsius).to eq(20.4)
     end
 
     it 'returns the temperature in celsius when given kelvin' do
@@ -37,9 +37,9 @@ describe "TemperatureConverter" do
     it 'returns the temperature in celsius when given fahrenheit' do
       # The formula to convert fahrenheit to celsius is:
     # celsius_temperature = (fahrenheit_temperature - 32.0) * (5.0/9.0)
-      converter = TemperatureConverter.new(:fahrenheit, 78)
+      converter = TemperatureConverter.new(:fahrenheit, 52)
 
-      expect(converter.to_celsius).to be_within(0.1).of(25.56)
+      expect(converter.to_celsius).to be_within(0.1).of(11.11)
     end
   end
 
@@ -71,15 +71,15 @@ describe "TemperatureConverter" do
     end
 
     it 'returns the temperature in kelvin when given celsius' do
-      converter = TemperatureConverter.new(:celsius, 55)
+      converter = TemperatureConverter.new(:celsius, -1)
 
-      expect(converter.to_kelvin).to be_within(0.1).of(328.15)
+      expect(converter.to_kelvin).to be_within(0.1).of(272.15)
     end
 
     it 'returns the temperature in kelvin when given fahrenheit' do
-      converter = TemperatureConverter.new(:fahrenheit, 120)
+      converter = TemperatureConverter.new(:fahrenheit, 32)
 
-      expect(converter.to_kelvin).to be_within(0.1).of(322.04)
+      expect(converter.to_kelvin).to be_within(0.1).of(273.15)
     end
   end
 
